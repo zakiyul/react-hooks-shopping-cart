@@ -1,0 +1,9 @@
+.ukuranKecil {
+  width: 100%;
+}
+.cardku {
+}
+.cardku:hover {
+  transition: 0.5s;
+  background-color: rgb(240, 240, 240);
+}

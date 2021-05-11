@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Card,
   CardImg,
@@ -6,7 +5,6 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 

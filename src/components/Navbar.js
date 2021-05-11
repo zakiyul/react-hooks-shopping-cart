@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { AiOutlineShop } from "react-icons/ai";
+import React, { useState, useContext, useReducer } from "react";
+import { CartContext } from "../context/CartContext";
+import { AiOutlineShop, AiOutlineShoppingCart } from "react-icons/ai";
 import {
   Collapse,
   Navbar,
@@ -7,12 +8,12 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  NavbarText,
+  Badge,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Example = () => {
+  const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -20,17 +21,26 @@ const Example = () => {
   return (
     <div className="mb-3">
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">
+        <Link className="navbar-brand" to="/">
           <AiOutlineShop /> Ecommerce
-        </NavbarBrand>
+        </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <Link to="/all-products">All products</Link>
+              <Link className="nav-link" to="/all-products">
+                All products
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link className="nav-link" to="/cart">
+                <AiOutlineShoppingCart /> Cart
+                <Badge className="ml-1" color="success" pill>
+                  {cart ? cart.length : 0}
+                </Badge>
+              </Link>
             </NavItem>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
     </div>

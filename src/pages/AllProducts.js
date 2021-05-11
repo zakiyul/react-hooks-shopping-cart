@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
-
-import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 
 export default function App() {
@@ -10,7 +8,6 @@ export default function App() {
   const getAllProducts = async () => {
     const response = await Axios.get(`https://fakestoreapi.com/products`);
     setProducts(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -19,7 +16,6 @@ export default function App() {
 
   return (
     <div>
-      <Navbar />
       <div className="container">
         <div className="row">
           {products.map((product) => (

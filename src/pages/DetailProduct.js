@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import { Table } from "reactstrap";
-
-import Navbar from "../components/Navbar";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { CartContext } from "../context/CartContext";
+import { ADD_TO_CART } from "../context/Reducers";
 
 export default function DetailProduct() {
   let { productId } = useParams();
   const [product, setProduct] = useState({});
+  const { cart, dispatch } = useContext(CartContext);
 
   const getProduct = async () => {
     const response = await Axios.get(
@@ -16,13 +18,22 @@ export default function DetailProduct() {
     setProduct(response.data);
   };
 
+  const addToCart = () => {
+    console.log(cart);
+    dispatch({
+      type: ADD_TO_CART,
+      cart: {
+        ...product,
+      },
+    });
+  };
+
   useEffect(() => {
     getProduct();
   }, []);
 
   return (
     <div>
-      <Navbar />
       <div className="container mt-4">
         <div className="row">
           <div className="col-md-8">
@@ -52,6 +63,9 @@ export default function DetailProduct() {
             />
           </div>
         </div>
+        <button onClick={addToCart} className="btn btn-success btn-sm">
+          <AiOutlineShoppingCart /> add to cart
+        </button>
       </div>
     </div>
   );
