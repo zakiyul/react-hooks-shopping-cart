@@ -1,11 +1,10 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { AiOutlineShop, AiOutlineShoppingCart } from "react-icons/ai";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   Badge,
