@@ -9,7 +9,7 @@ import { ADD_TO_CART } from "../context/Reducers";
 export default function DetailProduct() {
   let { productId } = useParams();
   const [product, setProduct] = useState({});
-  const { cart, dispatch } = useContext(CartContext);
+  const { dispatch } = useContext(CartContext);
 
   const getProduct = async () => {
     const response = await Axios.get(
@@ -19,7 +19,6 @@ export default function DetailProduct() {
   };
 
   const addToCart = () => {
-    console.log(cart);
     dispatch({
       type: ADD_TO_CART,
       cart: {
@@ -39,6 +38,12 @@ export default function DetailProduct() {
           <div className="col-md-8">
             <h4> {product.title} </h4>
             <Table className="mt-5">
+              <button
+                onClick={addToCart}
+                className="btn btn-success btn-sm mb-2"
+              >
+                <AiOutlineShoppingCart /> add to cart
+              </button>
               <tbody>
                 <tr>
                   <td>Price</td>
@@ -63,9 +68,6 @@ export default function DetailProduct() {
             />
           </div>
         </div>
-        <button onClick={addToCart} className="btn btn-success btn-sm">
-          <AiOutlineShoppingCart /> add to cart
-        </button>
       </div>
     </div>
   );

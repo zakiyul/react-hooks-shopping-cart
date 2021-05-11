@@ -6,13 +6,19 @@ import CartComp from "../components/CartComp";
 export default function Cart() {
   const { cart } = useContext(CartContext);
 
-  const cartPrices = cart.map((c) => c.price);
+  const cartPrices = cart.map((c) => c.price * c.qty);
   const reducer = (acc, currnt) => acc + currnt;
 
   return (
     <div>
       <div className="container">
-        <h4>Cart</h4>
+        <div className="d-inline">
+          <h4>Cart</h4>
+          <h4 class="badge rounded-pill bg-success p-2 text-white ml-auto">
+            Total Belanja : $ {cart.length ? cartPrices.reduce(reducer) : 0}
+          </h4>
+        </div>
+        <hr />
         {cart.length
           ? cart.map((c) => (
               <CartComp
@@ -24,9 +30,6 @@ export default function Cart() {
               />
             ))
           : "Tidak ada item di cart"}
-        <h5>
-          Total Belanja : $ {cart.length ? cartPrices.reduce(reducer) : 0}
-        </h5>
       </div>
     </div>
   );

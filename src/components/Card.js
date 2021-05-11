@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 
 const CardProduct = ({ title, price, category, image, id }) => {
   return (
-    <div>
-      <Card>
+    <div className="mb-2">
+      <Card className="h-100">
         <CardImg
           className="img-fluid w-50 p-3"
           top
