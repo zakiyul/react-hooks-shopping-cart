@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { REMOVE_FROM_CART } from "../context/Reducers";
+import {
+  REMOVE_FROM_CART,
+  INCREASE_QTY,
+  REDUCE_QTY,
+} from "../context/Reducers";
 import classes from "./CartComp.module.css";
 
 const CartComp = (props) => {
@@ -8,6 +12,20 @@ const CartComp = (props) => {
   const removeFromCart = (cartId) => {
     dispatch({
       type: REMOVE_FROM_CART,
+      id: cartId,
+    });
+  };
+
+  const incrementQty = (cartId) => {
+    dispatch({
+      type: INCREASE_QTY,
+      id: cartId,
+    });
+  };
+
+  const decrementQty = (cartId) => {
+    dispatch({
+      type: REDUCE_QTY,
       id: cartId,
     });
   };
@@ -25,9 +43,19 @@ const CartComp = (props) => {
         <div className="col-6">
           <h6>{props.title}</h6>
           <small>$ {props.price}</small> <br />
-          {/* <button className="btn btn-danger btn-sm mr-1">-</button> */}
+          <button
+            onClick={() => decrementQty(props.cartId)}
+            className="btn btn-danger btn-sm mr-1"
+          >
+            -
+          </button>
           <span>Qty : {props.qty}</span>
-          {/* <button className="btn btn-success btn-sm ml-1">+</button> */}
+          <button
+            onClick={() => incrementQty(props.cartId)}
+            className="btn btn-success btn-sm ml-1"
+          >
+            +
+          </button>
           <br />
           <button
             onClick={() => removeFromCart(props.cartId)}
